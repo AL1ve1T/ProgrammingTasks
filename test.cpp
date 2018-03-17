@@ -1,18 +1,20 @@
 #include <iostream>
+#include <map>
+#include <algorithm>
 
-class Foo
-{
-    public:
-        Foo() { std::cout << "Created" << this << std::endl;}
-        ~Foo() { std::cout << "Destructed" << this << std::endl;}
-};
+using namespace std;
 
 int main()
 {
-    for(int i = 0; i < 3; i++)
+    std::map<int, int> order;
+    order[1] = 67;
+    order[2] = 20;
+    order[4] = 30;
+    order[3] = 47;
+
+    for (auto num : order)
     {
-        Foo* foo = new Foo();
-        delete foo;
+        cout << num.second << ' ';
     }
 
     return 0;
