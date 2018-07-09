@@ -1,45 +1,22 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <pthread.h>
+#include <vector>
 
-static void wait_thread( void )
+template<typename K, typename V>
+class HashNode
 {
-    time_t start_time = time( NULL );
-
-    while( time( NULL ) == start_time )
-        ; /* do nothing except chew CPU slices for up to one second. */
-}
-
-static void* thread_func( void* vptr_args )
-{
-    unsigned i;
-
-    for( i = 0; i < 20; ++i )
+    public:
+    V value;
+    K key;
+     
+    //Constructor of hashnode 
+    HashNode(K key, V value)
     {
-        fputs( "b\n", stderr );
-        wait_thread();
+        this->value = value;
+        this->key = key;
     }
+};
 
-    return NULL;
-}
-
-int main( void )
+int main()
 {
-    unsigned i;
-    pthread_t thread;
-
-    if ( pthread_create( &thread, NULL, thread_func, NULL ) )
-        return EXIT_FAILURE;
-
-    for( i = 0; i < 20; ++i )
-    {
-        puts( "a\n" );
-        wait_thread();
-    }
-
-    if ( pthread_join( thread, NULL ) )
-        return EXIT_FAILURE;
-
-    return EXIT_SUCCESS;
+    HashNode<int, int> **arr = new HashNode<int, int>*[3];
+    return 0;
 }
